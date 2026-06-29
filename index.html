@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FACILITY Consultoria Rural - Regularização de ITR, CCR e CCIR. Fique em dia com a Receita Federal e o INCRA sem sair da sua lavoura.">
+    <title>FACILITY Consultoria Rural | Regularização de ITR e CCR</title>
+    <style>
+        /* ============================================
+           RESET E BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-dark: #0f241b;
+            --green-deep: #1b4332;
+            --green-soft: #2d6a4f;
+            --green-light: #40916c;
+            --orange-primary: #d97706;
+            --orange-hover: #b45309;
+            --orange-light: #f59e0b;
+            --whatsapp: #25d366;
+            --whatsapp-hover: #128c7e;
+            --bg-gradient-start: #0f241b;
+            --bg-gradient-mid: #1b4332;
+            --bg-gradient-end: #0d1512;
+            --text-white: #ffffff;
+            --text-light: #e5e7eb;
+            --text-muted: #9ca3af;
+            --text-dark: #1f2937;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --alert-bg: rgba(220, 38, 38, 0.12);
+            --alert-border: #ef4444;
+            --form-bg: #f8fafc;
+            --form-border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-pill: 9999px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+            background-attachment: fixed;
+            color: var(--text-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           UTILITÁRIOS
+           ============================================ */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 36, 27, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-white);
+        }
+
+        .logo__icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--green-soft), var(--green-light));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .logo__text {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .logo__text span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--whatsapp);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+            white-space: nowrap;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           HERO / HEADLINE
+           ============================================ */
+        .hero {
+            padding: 140px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(45, 106, 79, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(217, 119, 6, 0.15);
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            color: var(--orange-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 24px;
+        }
+
+        .hero__badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .hero__title {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: var(--text-white);
+            text-wrap: balance;
+        }
+
+        .hero__title .highlight {
+            color: var(--orange-light);
+            position: relative;
+        }
+
+        .hero__title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: rgba(217, 119, 6, 0.25);
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        .hero__subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            text-wrap: pretty;
+        }
+
+        .hero__trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero__trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero__trust-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--green-light);
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           ALERTA URGENTE
+           ============================================ */
+        .alert-section {
+            padding: 20px 0 40px;
+        }
+
+        .alert-box {
+            background: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--alert-border);
+            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+        }
+
+        .alert-box__header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .alert-box__icon {
+            width: 28px;
+            height: 28px;
+            background: var(--alert-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .alert-box__icon svg {
+            width: 16px;
+            height: 16px;
+            color: white;
+        }
+
+        .alert-box__title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fca5a5;
+            letter-spacing: -0.01em;
+        }
+
+        .alert-box__list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px 20px;
+        }
+
+        .alert-box__list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: #fecaca;
+            line-height: 1.5;
+        }
+
+        .alert-box__list li::before {
+            content: '✕';
+            color: var(--alert-border);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ============================================
+           FORMULÁRIO
+           ============================================ */
+        .form-section {
+            padding: 20px 0 60px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--orange-primary), var(--orange-light));
+        }
+
+        .form-card__header {
+            padding: 32px 32px 0;
+            text-align: center;
+        }
+
+        .form-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .form-card__subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .form-card__body {
+            padding: 24px 32px 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        .form-label .required {
+            color: var(--orange-light);
+            margin-left: 2px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text-dark);
+            background: var(--form-bg);
+            border: 2px solid var(--form-border);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-input::placeholder {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .form-input:focus {
+            border-color: var(--green-soft);
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.15);
+            background: white;
+        }
+
+        .form-input:hover {
+            border-color: #cbd5e1;
+        }
+
+        .form-input--error {
+            border-color: var(--alert-border) !important;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15) !important;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid var(--card-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--green-soft);
+            background: rgba(45, 106, 79, 0.08);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--green-soft);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item__text {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .checkbox-item__text small {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* Radio buttons */
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid var(--card-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .radio-item:hover {
+            border-color: var(--green-soft);
+            background: rgba(45, 106, 79, 0.08);
+        }
+
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--green-soft);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .radio-item__text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: white;
+            background: linear-gradient(135deg, var(--orange-primary), var(--orange-light));
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, var(--orange-hover), var(--orange-primary));
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(217, 119, 6, 0.45);
+        }
+
+        .btn-submit:hover::after {
+            left: 100%;
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Security seal */
+        .security-seal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .security-seal svg {
+            width: 16px;
+            height: 16px;
+            color: var(--green-light);
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: rgba(13, 21, 18, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 32px 0;
+            text-align: center;
+        }
+
+        .footer__text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .footer__text strong {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .footer__divider {
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--green-soft), var(--green-light));
+            border-radius: 2px;
+            margin: 12px auto;
+        }
+
+        .footer__copyright {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @media (max-width: 768px) {
+            .header__inner {
+                height: 64px;
+                padding: 0 16px;
+            }
+
+            .logo__text {
+                font-size: 1rem;
+            }
+
+            .logo__text span {
+                font-size: 0.65rem;
+            }
+
+            .btn-whatsapp {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+                gap: 6px;
+            }
+
+            .btn-whatsapp svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .hero {
+                padding: 110px 16px 40px;
+            }
+
+            .hero__badge {
+                font-size: 0.7rem;
+                padding: 5px 12px;
+            }
+
+            .hero__title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .hero__subtitle {
+                font-size: 1rem;
+            }
+
+            .hero__trust {
+                gap: 12px;
+                font-size: 0.8rem;
+            }
+
+            .alert-section {
+                padding: 16px 0 32px;
+            }
+
+            .alert-box {
+                padding: 20px;
+            }
+
+            .alert-box__title {
+                font-size: 1rem;
+            }
+
+            .alert-box__list {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .alert-box__list li {
+                font-size: 0.9rem;
+            }
+
+            .form-section {
+                padding: 16px 0 40px;
+            }
+
+            .form-card__header {
+                padding: 24px 20px 0;
+            }
+
+            .form-card__title {
+                font-size: 1.25rem;
+            }
+
+            .form-card__body {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .form-input {
+                padding: 12px 14px;
+                font-size: 16px; /* Previne zoom no iOS */
+            }
+
+            .checkbox-item {
+                padding: 12px 14px;
+            }
+
+            .checkbox-item input[type="checkbox"] {
+                width: 24px;
+                height: 24px;
+            }
+
+            .checkbox-item__text {
+                font-size: 0.9rem;
+            }
+
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+
+            .radio-item {
+                padding: 12px 14px;
+            }
+
+            .radio-item input[type="radio"] {
+                width: 22px;
+                height: 22px;
+            }
+
+            .radio-item__text {
+                font-size: 0.85rem;
+            }
+
+            .btn-submit {
+                padding: 16px 20px;
+                font-size: 0.95rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title {
+                font-size: 1.55rem;
+            }
+
+            .logo__icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+        }
+
+        /* ============================================
+           ANIMAÇÕES
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero__badge,
+        .hero__title,
+        .hero__subtitle,
+        .hero__trust,
+        .alert-box,
+        .form-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .hero__title { animation-delay: 0.1s; }
+        .hero__subtitle { animation-delay: 0.2s; }
+        .hero__trust { animation-delay: 0.3s; }
+        .alert-box { animation-delay: 0.4s; }
+        .form-card { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <header class="header">
+        <div class="header__inner">
+            <a href="#" class="logo" aria-label="FACILITY Consultoria Rural - Página inicial">
+                <div class="logo__icon" aria-hidden="true">FC</div>
+                <div class="logo__text">
+                    FACILITY
+                    <span>Consultoria Rural</span>
+                </div>
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=5555984255172&text=Olá!%20Gostaria%20de%20falar%20com%20um%20especialista%20sobre%20regularização%20de%20imóvel%20rural." 
+               class="btn-whatsapp" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-label="Falar com especialista via WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.47-.248m-5.588 9.968c-3.809 0-7.303-1.904-9.853-5.091-.167-.223-.124-.534.099-.7.223-.167.534-.124.7.099 2.323 2.868 5.544 4.515 9.054 4.515 6.877 0 12.471-5.594 12.471-12.471 0-6.877-5.594-12.471-12.471-12.471-6.877 0-12.471 5.594-12.471 12.471 0 2.193.565 4.343 1.634 6.236.143.248.06.566-.188.709-.248.143-.566.06-.709-.188-1.196-2.124-1.829-4.543-1.829-6.957 0-7.732 6.291-14.023 14.023-14.023 7.732 0 14.023 6.291 14.023 14.023 0 7.732-6.291 14.023-14.023 14.023"/>
+                </svg>
+                Falar com Especialista
+            </a>
+        </div>
+    </header>
+
+    <!-- ============================================
+         HERO / HEADLINE
+         ============================================ -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+            <div class="hero__badge">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/>
+                </svg>
+                Especialistas em Regularização Rural
+            </div>
+            <h1 id="hero-title" class="hero__title">
+                Fique em dia com a <span class="highlight">Receita Federal</span> e o <span class="highlight">INCRA</span> sem sair da sua lavoura
+            </h1>
+            <p class="hero__subtitle">
+                Emita, atualize ou regularize seu <strong>ITR</strong>, <strong>CCR</strong> e <strong>CCIR</strong> com quem entende de agronegócio. Atendimento rápido, seguro e 100% digital para produtores de todo o Brasil.
+            </p>
+            <div class="hero__trust">
+                <div class="hero__trust-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/>
+                    </svg>
+                    Atendimento em 24h
+                </div>
+                <div class="hero__trust-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/>
+                    </svg>
+                    Dados 100% sigilosos
+                </div>
+                <div class="hero__trust-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd"/>
+                    </svg>
+                    Processo ágil e digital
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ALERTA URGENTE
+         ============================================ -->
+    <section class="alert-section" aria-labelledby="alert-title">
+        <div class="container">
+            <div class="alert-box" role="alert">
+                <div class="alert-box__header">
+                    <div class="alert-box__icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h2 id="alert-title" class="alert-box__title">⚠️ Não deixe para depois: os riscos são reais</h2>
+                </div>
+                <ul class="alert-box__list">
+                    <li>Multas pesadas da Receita Federal por atraso ou omissão no ITR</li>
+                    <li>Bloqueio do CPF e restrições no CNPJ do produtor rural</li>
+                    <li>Impedimento de acesso ao crédito de custeio agrícola (PRONAF, SAFRA, etc.)</li>
+                    <li>Perda de direitos sobre o imóvel rural perante o INCRA</li>
+                    <li>Dificuldade para vender, transferir ou financiar a propriedade</li>
+                    <li>Penalidades que podem superar o valor do imposto devido em até 150%</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FORMULÁRIO
+         ============================================ -->
+    <section class="form-section" aria-labelledby="form-title">
+        <div class="container">
+            <div class="form-card">
+                <div class="form-card__header">
+                    <h2 id="form-title" class="form-card__title">Solicite sua regularização agora</h2>
+                    <p class="form-card__subtitle">Preencha o formulário abaixo e um especialista entrará em contato</p>
+                </div>
+                <div class="form-card__body">
+                    <form id="leadForm" novalidate>
+
+                        <!-- Nome -->
+                        <div class="form-group">
+                            <label for="nome" class="form-label">
+                                Nome completo do Proprietário/Produtor <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="nome" 
+                                name="nome" 
+                                class="form-input" 
+                                placeholder="Ex: João da Silva"
+                                required
+                                autocomplete="name"
+                                aria-required="true"
+                            >
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="form-group">
+                            <label for="whatsapp" class="form-label">
+                                WhatsApp para contato <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="whatsapp" 
+                                name="whatsapp" 
+                                class="form-input" 
+                                placeholder="(00) 00000-0000"
+                                required
+                                autocomplete="tel"
+                                maxlength="15"
+                                aria-required="true"
+                            >
+                        </div>
+
+                        <!-- Cidade e Estado -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cidade" class="form-label">
+                                    Cidade da Propriedade <span class="required" aria-hidden="true">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="cidade" 
+                                    name="cidade" 
+                                    class="form-input" 
+                                    placeholder="Ex: São Paulo"
+                                    required
+                                    autocomplete="address-level2"
+                                    aria-required="true"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="estado" class="form-label">
+                                    Estado <span class="required" aria-hidden="true">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="estado" 
+                                    name="estado" 
+                                    class="form-input" 
+                                    placeholder="Ex: SP"
+                                    required
+                                    maxlength="2"
+                                    autocomplete="address-level1"
+                                    aria-required="true"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Serviços (Checkboxes) -->
+                        <div class="form-group">
+                            <span class="form-label">Qual serviço você precisa? <span class="required" aria-hidden="true">*</span></span>
+                            <div class="checkbox-group" role="group" aria-label="Serviços necessários">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="servicos" value="Emissão/Atualização do CCR" aria-describedby="servico-ccr">
+                                    <span class="checkbox-item__text" id="servico-ccr">
+                                        Emissão/Atualização do CCR
+                                        <small>Certificado de Cadastro de Imóvel Rural</small>
+                                    </span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="servicos" value="Declaração/Regularização do ITR" aria-describedby="servico-itr">
+                                    <span class="checkbox-item__text" id="servico-itr">
+                                        Declaração/Regularização do ITR
+                                        <small>Imposto Territorial Rural</small>
+                                    </span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="servicos" value="Preciso de Ambos" aria-describedby="servico-ambos">
+                                    <span class="checkbox-item__text" id="servico-ambos">
+                                        Preciso de Ambos
+                                        <small>CCR + ITR (pacote completo)</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Tamanho da Área (Radio) -->
+                        <div class="form-group">
+                            <span class="form-label">Tamanho da área da propriedade <span class="required" aria-hidden="true">*</span></span>
+                            <div class="radio-group" role="radiogroup" aria-label="Tamanho da área da propriedade">
+                                <label class="radio-item">
+                                    <input type="radio" name="area" value="Até 50 ha" required>
+                                    <span class="radio-item__text">Até 50 ha</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="area" value="51 a 200 ha" required>
+                                    <span class="radio-item__text">51 a 200 ha</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="area" value="201 a 1.000 ha" required>
+                                    <span class="radio-item__text">201 a 1.000 ha</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="area" value="Acima de 1.000 ha" required>
+                                    <span class="radio-item__text">Acima de 1.000 ha</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn-submit">
+                            Regularizar minha terra agora
+                        </button>
+
+                        <!-- Security Seal -->
+                        <div class="security-seal">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/>
+                            </svg>
+                            Seus dados e informações do imóvel são sigilosos e protegidos
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">
+                <strong>FACILITY Consultoria Rural</strong><br>
+                Especialistas em regularização de imóveis rurais, ITR, CCR e CCIR.<br>
+                Atendimento personalizado para produtores de todo o Brasil.
+            </p>
+            <div class="footer__divider" aria-hidden="true"></div>
+            <p class="footer__copyright">
+                © 2026 FACILITY Consultoria Rural. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================
+            // CONFIGURAÇÃO
+            // ============================================
+            const seuNumeroWhatsApp = "5555984255172";
+
+            // ============================================
+            // MÁSCARA DE WHATSAPP
+            // ============================================
+            const whatsappInput = document.getElementById('whatsapp');
+
+            function aplicarMascaraWhatsApp(valor) {
+                // Remove tudo que não é dígito
+                let numeros = valor.replace(/\D/g, '');
+
+                // Limita a 11 dígitos
+                if (numeros.length > 11) {
+                    numeros = numeros.slice(0, 11);
+                }
+
+                // Aplica a máscara (XX) XXXXX-XXXX
+                if (numeros.length > 7) {
+                    return '(' + numeros.slice(0, 2) + ') ' + numeros.slice(2, 7) + '-' + numeros.slice(7);
+                } else if (numeros.length > 2) {
+                    return '(' + numeros.slice(0, 2) + ') ' + numeros.slice(2);
+                } else if (numeros.length > 0) {
+                    return '(' + numeros;
+                }
+                return '';
+            }
+
+            whatsappInput.addEventListener('input', function(e) {
+                const cursorPos = this.selectionStart;
+                const valorAnterior = this.value;
+                const valorMascarado = aplicarMascaraWhatsApp(this.value);
+
+                this.value = valorMascarado;
+
+                // Ajusta posição do cursor
+                if (cursorPos < valorAnterior.length) {
+                    this.setSelectionRange(cursorPos, cursorPos);
+                }
+            });
+
+            // ============================================
+            // VALIDAÇÃO E ENVIO DO FORMULÁRIO
+            // ============================================
+            const form = document.getElementById('leadForm');
+            const inputs = form.querySelectorAll('.form-input');
+
+            function limparErros() {
+                inputs.forEach(input => input.classList.remove('form-input--error'));
+            }
+
+            function mostrarErro(input) {
+                input.classList.add('form-input--error');
+                input.focus();
+            }
+
+            function validarFormulario() {
+                limparErros();
+                let valido = true;
+                let primeiroErro = null;
+
+                // Valida campos de texto
+                const camposObrigatorios = ['nome', 'whatsapp', 'cidade', 'estado'];
+
+                for (const campoId of camposObrigatorios) {
+                    const campo = document.getElementById(campoId);
+                    const valor = campo.value.trim();
+
+                    if (!valor) {
+                        valido = false;
+                        if (!primeiroErro) primeiroErro = campo;
+                        mostrarErro(campo);
+                    }
+                }
+
+                // Valida WhatsApp (mínimo 11 dígitos)
+                const whatsappValor = whatsappInput.value.replace(/\D/g, '');
+                if (whatsappValor.length < 10) {
+                    valido = false;
+                    if (!primeiroErro) primeiroErro = whatsappInput;
+                    mostrarErro(whatsappInput);
+                }
+
+                // Valida Estado (2 caracteres)
+                const estado = document.getElementById('estado');
+                if (estado.value.trim().length !== 2) {
+                    valido = false;
+                    if (!primeiroErro) primeiroErro = estado;
+                    mostrarErro(estado);
+                }
+
+                // Valida checkboxes de serviços
+                const servicosCheckboxes = document.querySelectorAll('input[name="servicos"]:checked');
+                if (servicosCheckboxes.length === 0) {
+                    valido = false;
+                    if (!primeiroErro) {
+                        const primeiroCheckbox = document.querySelector('input[name="servicos"]');
+                        primeiroCheckbox.focus();
+                    }
+                }
+
+                // Valida radio de área
+                const areaRadio = document.querySelector('input[name="area"]:checked');
+                if (!areaRadio) {
+                    valido = false;
+                    if (!primeiroErro) {
+                        const primeiroRadio = document.querySelector('input[name="area"]');
+                        primeiroRadio.focus();
+                    }
+                }
+
+                if (primeiroErro) {
+                    primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                return valido;
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!validarFormulario()) {
+                    return;
+                }
+
+                // ============================================
+                // COLETA DOS DADOS
+                // ============================================
+                const nome = document.getElementById('nome').value.trim();
+                const whatsapp = whatsappInput.value.trim();
+                const cidade = document.getElementById('cidade').value.trim();
+                const estado = document.getElementById('estado').value.trim().toUpperCase();
+
+                const servicosSelecionados = Array.from(
+                    document.querySelectorAll('input[name="servicos"]:checked')
+                ).map(cb => cb.value);
+
+                const areaSelecionada = document.querySelector('input[name="area"]:checked').value;
+
+                // ============================================
+                // MONTA A MENSAGEM FORMATADA PARA WHATSAPP
+                // ============================================
+                let mensagem = "*🌾 NOVO LEAD - FACILITY CONSULTORIA RURAL*";
+                mensagem += "%0A%0A";
+                mensagem += "*Dados do Produtor:*";
+                mensagem += "%0A";
+                mensagem += "• *Nome:* " + nome;
+                mensagem += "%0A";
+                mensagem += "• *WhatsApp:* " + whatsapp;
+                mensagem += "%0A";
+                mensagem += "• *Cidade/UF:* " + cidade + " - " + estado;
+                mensagem += "%0A%0A";
+
+                mensagem += "*Serviço(s) solicitado(s):*";
+                mensagem += "%0A";
+                servicosSelecionados.forEach(function(servico) {
+                    mensagem += "• " + servico;
+                    mensagem += "%0A";
+                });
+
+                mensagem += "%0A";
+                mensagem += "*Tamanho da área:* " + areaSelecionada;
+                mensagem += "%0A%0A";
+                mensagem += "_Lead gerado automaticamente via Landing Page_";
+
+                // ============================================
+                // MONTA O LINK DO WHATSAPP
+                // ============================================
+                const urlWhatsApp = "https://api.whatsapp.com/send?phone=5555984255172&text=Gostaria de atendimento referente aos meus documentos anuais";
+
+                // ============================================
+                // ALERTA DE SUCESSO E REDIRECIONAMENTO
+                // ============================================
+                alert(
+                    "✅ Solicitação enviada com sucesso!
+
+" +
+                    "Obrigado, " + nome.split(' ')[0] + "!
+
+" +
+                    "Você será redirecionado para o WhatsApp para finalizar o atendimento com um de nossos especialistas."
+                );
+
+                // Abre em nova aba
+                window.open(urlWhatsApp, '_blank');
+            });
+
+            // Remove erro ao interagir com o campo
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('form-input--error');
+                });
+            });
+
+            // ============================================
+            // HEADER SCROLL EFFECT
+            // ============================================
+            const header = document.querySelector('.header');
+            let lastScroll = 0;
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+
+                if (currentScroll > 50) {
+                    header.style.background = 'rgba(15, 36, 27, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.background = 'rgba(15, 36, 27, 0.85)';
+                    header.style.boxShadow = 'none';
+                }
+
+                lastScroll = currentScroll;
+            });
+
+        })();
+    </script>
+</body>
+</html>
