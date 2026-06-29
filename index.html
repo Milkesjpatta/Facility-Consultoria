@@ -761,7 +761,7 @@
 
             .form-input {
                 padding: 12px 14px;
-                font-size: 16px; /* Previne zoom no iOS */
+                font-size: 16px;
             }
 
             .checkbox-item {
@@ -1192,7 +1192,7 @@
                     }
                 }
 
-                // Valida WhatsApp (mínimo 11 dígitos)
+                // Valida WhatsApp (mínimo 10 dígitos)
                 const whatsappValor = whatsappInput.value.replace(/\D/g, '');
                 if (whatsappValor.length < 10) {
                     valido = false;
@@ -1285,18 +1285,14 @@
                 // ============================================
                 // MONTA O LINK DO WHATSAPP
                 // ============================================
-                const urlWhatsApp = "https://api.whatsapp.com/send?phone=5555984255172&text=Gostaria de atendimento referente aos meus documentos anuais";
+                const urlWhatsApp = "https://api.whatsapp.com/send?phone=" + seuNumeroWhatsApp + "&text=" + mensagem;
 
                 // ============================================
                 // ALERTA DE SUCESSO E REDIRECIONAMENTO
                 // ============================================
                 alert(
-                    "✅ Solicitação enviada com sucesso!
-
-" +
-                    "Obrigado, " + nome.split(' ')[0] + "!
-
-" +
+                    "✅ Solicitação enviada com sucesso!\n\n" +
+                    "Obrigado, " + nome.split(' ')[0] + "!\n\n" +
                     "Você será redirecionado para o WhatsApp para finalizar o atendimento com um de nossos especialistas."
                 );
 
